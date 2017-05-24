@@ -1,17 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class AddButton extends Component {
-  render() {
-    return (
-      <div>
-        <button onClick={event => this.addNote()} >+</button>
-      </div>
-    );
-  }
-
-  addNote() {
-
-  }
-}
+const AddButton = ({addNote, noteColor, noteContent}) => {
+  return (
+    <div>
+      <button onClick={() => addNote({content: noteContent, color: noteColor})} >+</button>
+    </div>
+  )
+};
 
 export default AddButton;

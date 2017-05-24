@@ -41,7 +41,9 @@ class AddForm extends Component {
           changeSelectedColor={(selectedColor) => this.setState({selectedColor})}
         />
         <AddButton
-          onClick={this.onAddClick}
+          addNote={this.props.addNote}
+          noteColor={this.state.selectedColor}
+          noteContent={this.state.noteContent}
         />
       </div>
     );
@@ -51,9 +53,6 @@ class AddForm extends Component {
     this.setState({noteContent});
   }
 
-  onAddClick() {
-    alert('hi');
-  }
 }
 
 export default AddForm;

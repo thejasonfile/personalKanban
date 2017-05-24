@@ -23,7 +23,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <AddForm
-          addNote={(note) => this.setState.toDoNotes.push(note)}
+          addNote={newNote => this.setState({ toDoNotes: [...this.state.toDoNotes, newNote] })}
         />
         <Container
           classes={"container"}
