@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
-import '../assets/css/app.css';
+import React from 'react';
 
-class RadioButton extends Component {
-  render() {
-    return (
+const RadioButton = ({name, color, changeSelectedColor}) => {
+  return (
       <div>
         <input
           type="radio"
-          name={this.props.name}
-          value={this.props.color}
+          name={name}
+          value={color}
+          onChange={() => changeSelectedColor(color)}
         ></input>
-      {this.props.color}
+        <span>{color}</span>
       </div>
-    );
-  }
+  );
 }
 
 export default RadioButton;

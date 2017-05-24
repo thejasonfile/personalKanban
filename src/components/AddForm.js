@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import '../assets/css/app.css';
-import RadioButton from './RadioButton'
+import RadioButton from './RadioButton';
+import AddButton from './AddButton';
 
 class AddForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {noteContent: ''}
+    this.state = {
+      noteContent: '',
+      selectedColor: ''
+    };
   }
   render() {
     return (
@@ -17,11 +21,29 @@ class AddForm extends Component {
           type="text"
           name="name"
         ></input>
-        <RadioButton name="yellow" color="Yellow" />
-        <RadioButton name="green" color="Green" />
-        <RadioButton name="blue" color="Blue" />
-        <RadioButton name="orange" color="Orange" />
-        <button>+</button>
+        <RadioButton
+          name="color"
+          color="Yellow"
+          changeSelectedColor={(selectedColor) => this.setState({selectedColor})}
+        />
+        <RadioButton
+          name="color"
+          color="Green"
+          changeSelectedColor={(selectedColor) => this.setState({selectedColor})}
+        />
+        <RadioButton
+          name="color"
+          color="Blue"
+          changeSelectedColor={(selectedColor) => this.setState({selectedColor})}
+        />
+        <RadioButton
+          name="color"
+          color="Orange"
+          changeSelectedColor={(selectedColor) => this.setState({selectedColor})}
+        />
+        <AddButton
+          noteContent={this.state.noteContent} noteColor={this.state.selectedColor}
+        />
       </div>
     );
   }
