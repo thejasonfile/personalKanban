@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": ";AAEA,MAAM;EACJ,UAAU,EAAE,MAAM;EAClB,SAAE;IACA,SAAS,EAAE,IAAc",
+"sources": ["../sass/2-layouts/_header.sass"],
+"names": [],
+"file": "app.css"
+}
