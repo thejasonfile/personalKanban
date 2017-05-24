@@ -215,7 +215,8 @@ header {
   border: 5px solid black;
   border-radius: 15px;
   margin-bottom: 10px;
-  height: 60vh; }
+  height: 60vh;
+  text-align: center; }
   .container:last-child, .currentProject:last-child {
     margin-right: 0; }
 

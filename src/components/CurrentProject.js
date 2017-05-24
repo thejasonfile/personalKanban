@@ -5,7 +5,7 @@ class CurrentProject extends Component {
   render() {
     return (
       <div className="container currentProject">
-
+        <h1>{this.props.title}</h1>
       </div>
     );
   }
