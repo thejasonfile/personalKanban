@@ -44,6 +44,7 @@ class AddForm extends Component {
           addNote={this.props.addNote}
           noteColor={this.state.selectedColor}
           noteContent={this.state.noteContent}
+          noteNumber={this.props.numNotes}
         />
       </div>
     );

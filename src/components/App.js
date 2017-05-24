@@ -9,12 +9,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      toDoNotes: [
-        {color: 'yellow', content: 'hello'}
-      ],
+      toDoNotes: [],
       currentProjectNote: [],
       doneNotes: [
-        {color: 'red', content: 'eat lunch'}
+        {key: 1, color: 'red', content: 'eat lunch'}
       ]
     };
   }
@@ -23,19 +21,23 @@ class App extends Component {
       <div className="App">
         <Header />
         <AddForm
+          numNotes={this.state.toDoNotes.length}
           addNote={newNote => this.setState({ toDoNotes: [...this.state.toDoNotes, newNote] })}
         />
         <Container
+          notesInContainer={this.state.toDoNotes.length}
           classes={"container"}
           notes={this.state.toDoNotes}
           title={"To Do"}
         />
         <Container
+          notesInContainer={this.state.currentProjectNote.length}
           classes={"container currentProject"}
           notes={this.state.currentProjectNote}
           title={"Current Project"}
         />
         <Container
+        notesInContainer={this.state.doneNotes.length}
         classes={"container"}
         notes={this.state.doneNotes}
         title={"Done"}

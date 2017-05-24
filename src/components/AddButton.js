@@ -1,9 +1,9 @@
 import React from 'react';
 
-const AddButton = ({addNote, noteColor, noteContent}) => {
+const AddButton = ({addNote, noteNumber, noteColor, noteContent}) => {
   return (
     <div>
-      <button onClick={() => addNote({content: noteContent, color: noteColor})} >+</button>
+      <button onClick={() => addNote({key: noteNumber, content: noteContent, color: noteColor})} >+</button>
     </div>
   )
 };

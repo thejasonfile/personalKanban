@@ -7,7 +7,7 @@ class Container extends Component {
       <div className={this.props.classes}>
         <h1>{this.props.title}</h1>
         {this.props.notes.map((note) => {
-          return <Note key={note.content} color={note.color} content={note.content} />
+          return <Note key={note.key} color={note.color} content={note.content} />
         })}
       </div>
     );
