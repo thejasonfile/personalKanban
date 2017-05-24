@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../assets/css/app.css';
 
 class AddButton extends Component {
   render() {
@@ -11,7 +10,6 @@ class AddButton extends Component {
   }
 
   addNote() {
-    
 
   }
 }
