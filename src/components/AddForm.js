@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../assets/css/app.css';
 import RadioButton from './RadioButton';
 import AddButton from './AddButton';
 
@@ -12,7 +11,7 @@ class AddForm extends Component {
       selectedColor: ''
     };
   }
-  render() {
+  render(addNote) {
     return (
       <div className="form">
         <input
@@ -42,7 +41,7 @@ class AddForm extends Component {
           changeSelectedColor={(selectedColor) => this.setState({selectedColor})}
         />
         <AddButton
-          noteContent={this.state.noteContent} noteColor={this.state.selectedColor}
+          onClick={this.onAddClick}
         />
       </div>
     );
@@ -50,6 +49,10 @@ class AddForm extends Component {
 
   onInputChange(noteContent) {
     this.setState({noteContent});
+  }
+
+  onAddClick() {
+    alert('hi');
   }
 }
 

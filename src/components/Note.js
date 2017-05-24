@@ -8,6 +8,8 @@ class Note extends Component {
     return (
       <div style={style}>
         {this.props.content}
+        <button>Make Current</button>
+        <button>Delete</button>
       </div>
     );
   }
