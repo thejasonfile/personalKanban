@@ -1,0 +1,15 @@
+/* CONTAINERS.SASS */
+
+.container
+  +span-columns(10)
+  +shift(1)
+  border: 5px solid black
+  border-radius: 15px
+  margin-bottom: 10px
+  height: 60vh
+
+.currentProject
+  @extend .container
+  +span-columns(3)
+  +shift(4.5)
+  height: 20vh

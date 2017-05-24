@@ -9,9 +9,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Container />
-        <CurrentProject />
-        <Container />
+        <Container title={"To Do"}/>
+        <CurrentProject title={"Current Project"}/>
+        <Container title={"Done"}/>
       </div>
     );
   }
