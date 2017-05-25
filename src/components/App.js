@@ -16,6 +16,7 @@ class App extends Component {
       ]
     };
   }
+
   render() {
     return (
       <div className="App">
@@ -29,6 +30,9 @@ class App extends Component {
           classes={"container"}
           notes={this.state.toDoNotes}
           title={"To Do"}
+          removeNote={noteNumber => this.setState({ toDoNotes: this.state.toDoNotes.filter((note) => {
+            return note.key !== noteNumber
+          })})}
         />
         <Container
           notesInContainer={this.state.currentProjectNote.length}

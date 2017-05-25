@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DeleteButton from './DeleteButton';
 
 class Note extends Component {
   render(props) {
@@ -8,8 +9,10 @@ class Note extends Component {
     return (
       <div style={style}>
         {this.props.content}
-        <button>Make Current</button>
-        <button>Delete</button>
+        <DeleteButton
+          removeNote={this.props.removeNote}
+          noteNumber={this.props.noteNumber}
+        />
       </div>
     );
   }
