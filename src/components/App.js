@@ -15,6 +15,9 @@ class App extends Component {
         {key: 1, color: 'red', content: 'eat lunch'}
       ]
     };
+
+    this.addNote = this.addNote.bind(this);
+    this.removeNote = this.removeNote.bind(this);
   }
 
   render() {
@@ -22,17 +25,15 @@ class App extends Component {
       <div className="App">
         <Header />
         <AddForm
-          numNotes={this.state.toDoNotes.length}
-          addNote={newNote => this.setState({ toDoNotes: [...this.state.toDoNotes, newNote] })}
+          state={this.state}
+          addNote={this.addNote}
         />
         <Container
           notesInContainer={this.state.toDoNotes.length}
           classes={"container"}
           notes={this.state.toDoNotes}
           title={"To Do"}
-          removeNote={noteNumber => this.setState({ toDoNotes: this.state.toDoNotes.filter((note) => {
-            return note.key !== noteNumber
-          })})}
+          removeNote={this.removeNote}
         />
         <Container
           notesInContainer={this.state.currentProjectNote.length}
@@ -54,6 +55,20 @@ class App extends Component {
         />
       </div>
     );
+  }
+
+  addNote(newNote) {
+    this.setState({ toDoNotes: [...this.state.toDoNotes, newNote]})
+  }
+
+  removeNote(noteNumber) {
+    this.setState({ toDoNotes: this.state.toDoNotes.filter((note) => {
+      return note.key !== noteNumber
+    })})
+  }
+
+  makeNoteCurrent(noteNumber) {
+
   }
 }
 

@@ -2,9 +2,7 @@ import React from 'react';
 
 const MakeCurrentButton = () => {
   return (
-    <div>
-
-    </div>
+    <button>Make Current</button>
   )
 };
 

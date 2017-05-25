@@ -41,10 +41,9 @@ class AddForm extends Component {
           changeSelectedColor={(selectedColor) => this.setState({selectedColor})}
         />
         <AddButton
+          state={this.props.state}
           addNote={this.props.addNote}
-          noteColor={this.state.selectedColor}
-          noteContent={this.state.noteContent}
-          noteNumber={this.props.numNotes}
+          noteState={this.state}
         />
       </div>
     );
