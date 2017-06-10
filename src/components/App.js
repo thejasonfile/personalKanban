@@ -7,7 +7,10 @@ class App extends Component {
 
     this.state = {
       input : '',
-      toDos : ['cash me outside', 'how bout dat?'],
+      toDos : [
+        {content: 'cash me outside', color: 'yellow', id: 0},
+        {content: 'how bout dat?', color: 'yellow', id: 1},
+      ],
       currentToDo: [],
       completedToDos: []
     };
@@ -16,6 +19,7 @@ class App extends Component {
     this.renderCurrentToDo = this.renderCurrentToDo.bind(this);
     this.addToDo = this.addToDo.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.onColorChange = this.onColorChange.bind(this);
     this.makeCurrent = this.makeCurrent.bind(this);
   }
 
@@ -23,12 +27,16 @@ class App extends Component {
     this.setState({input: e.target.value});
   }
 
+  onColorChange() {
+    
+  }
+
   renderToDos() {
     let todos = this.state.toDos;
     let resultArray = [];
     todos.map((todo, i) => resultArray.push(
       <li key={i}>
-        {todo}
+        {todo.content}
         <button onClick={this.makeCurrent}>Make Current</button>
         <button>Done</button>
       </li>
@@ -50,14 +58,14 @@ class App extends Component {
 
   addToDo(e) {
     e.preventDefault();
-    let noteContent = this.state.input;
+    let content = this.state.input;
     let toDos = this.state.toDos;
-    toDos.push(noteContent);
-    this.setState({input: '', toDos});
+    toDos.push({content, color: 'yellow', id: this.state.toDos.length});
+    this.setState({toDos});
   }
 
   makeCurrent(e){
-
+    console.log(e.target.value)
   }
 
   render () {
@@ -67,7 +75,7 @@ class App extends Component {
         <form>
           <label htmlFor="noteContent">Note Content: </label>
           <input type="text" name="noteContent" id="noteContent" value={this.state.input} onChange={this.onInputChange}></input>
-          <input type="radio" name="color" value="yellow"></input>Yellow
+          <input type="radio" name="color" value="yellow" onChange={this.onColorChange}></input>Yellow
           <input type="radio" name="color" value="green"></input>Green
           <input type="radio" name="color" value="blue"></input>Blue
           <input type="radio" name="color" value="orange"></input>Orange
