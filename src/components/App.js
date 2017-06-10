@@ -7,6 +7,7 @@ class App extends Component {
 
     this.state = {
       input : '',
+      selectedColor: 'yellow',
       toDos : [
         {content: 'cash me outside', color: 'yellow', id: 0},
         {content: 'how bout dat?', color: 'yellow', id: 1},
@@ -27,15 +28,15 @@ class App extends Component {
     this.setState({input: e.target.value});
   }
 
-  onColorChange() {
-    
+  onColorChange(e) {
+    this.setState({selectedColor: e.target.value})
   }
 
   renderToDos() {
     let todos = this.state.toDos;
     let resultArray = [];
     todos.map((todo, i) => resultArray.push(
-      <li key={i}>
+      <li key={i} className={todo.color}>
         {todo.content}
         <button onClick={this.makeCurrent}>Make Current</button>
         <button>Done</button>
@@ -60,7 +61,7 @@ class App extends Component {
     e.preventDefault();
     let content = this.state.input;
     let toDos = this.state.toDos;
-    toDos.push({content, color: 'yellow', id: this.state.toDos.length});
+    toDos.push({content, color: this.state.selectedColor, id: this.state.toDos.length});
     this.setState({toDos});
   }
 
@@ -76,9 +77,9 @@ class App extends Component {
           <label htmlFor="noteContent">Note Content: </label>
           <input type="text" name="noteContent" id="noteContent" value={this.state.input} onChange={this.onInputChange}></input>
           <input type="radio" name="color" value="yellow" onChange={this.onColorChange}></input>Yellow
-          <input type="radio" name="color" value="green"></input>Green
-          <input type="radio" name="color" value="blue"></input>Blue
-          <input type="radio" name="color" value="orange"></input>Orange
+          <input type="radio" name="color" value="green" onChange={this.onColorChange}></input>Green
+          <input type="radio" name="color" value="blue" onChange={this.onColorChange}></input>Blue
+          <input type="radio" name="color" value="orange" onChange={this.onColorChange}></input>Orange
           <br />
           <input type="submit" value="Submit" onClick={this.addToDo}></input>
         </form>
