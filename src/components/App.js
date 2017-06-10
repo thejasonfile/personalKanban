@@ -12,7 +12,7 @@ class App extends Component {
       toDoNotes: [],
       currentProjectNote: [],
       doneNotes: [
-        {key: 1, color: 'red', content: 'eat lunch'}
+        {key: 1, color: 'blue', content: 'eat lunch'}
       ]
     };
 
