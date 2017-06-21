@@ -6,15 +6,11 @@ class App extends Component {
     super(props);
 
     this.state = {
+      currentId: 0,
       input : '',
       selectedColor: 'yellow',
-      toDos : [
-        {content: 'cash me outside', color: 'yellow', id: 0},
-        {content: 'how bout dat?', color: 'orange', id: 1},
-      ],
-      currentToDo: [
-        {content: 'whatcho want?', color: 'blue', id: 2}
-      ],
+      toDos : [],
+      currentToDo: [],
       completedToDos: []
     };
 
@@ -26,6 +22,7 @@ class App extends Component {
     this.makeCurrent = this.makeCurrent.bind(this);
     this.removeFromToDo = this.removeFromToDo.bind(this);
     this.addToCurrentArray = this.addToCurrentArray.bind(this);
+    this.incrementId = this.incrementId.bind(this);
   }
 
   onInputChange(e) {
@@ -53,7 +50,7 @@ class App extends Component {
     let todos = this.state.currentToDo;
     return todos.map((todo, i) => {
       return (
-          <li key={i}>
+          <li key={i} className={todo.color}>
             {todo.content}
             <button>Done</button>
           </li>
@@ -65,8 +62,13 @@ class App extends Component {
     e.preventDefault();
     let content = this.state.input;
     let toDos = this.state.toDos;
-    toDos.push({content, color: this.state.selectedColor, id: this.state.toDos.length});
+    toDos.push({content, color: this.state.selectedColor, id: this.state.currentId});
     this.setState({toDos});
+    this.incrementId();
+  }
+
+  incrementId() {
+    this.setState({currentId: this.state.currentId + 1})
   }
 
   makeCurrent(id) {
