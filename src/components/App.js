@@ -40,7 +40,7 @@ class App extends Component {
         <li key={i} className={todo.color}>
           {todo.content}
           <button onClick={() => {this.makeCurrent(todo.id)}}>Make Current</button>
-          <button>Done</button>
+          <button onClick={() => {this.makeDone(todo.id)}}>Done</button>
         </li>
       )
     });
@@ -52,14 +52,23 @@ class App extends Component {
       return (
           <li key={i} className={todo.color}>
             {todo.content}
-            <button>Done</button>
+            <button onClick={() => {this.makeDone(todo.id)}}>Done</button>
           </li>
       )
     });
   }
 
   renderDone() {
-
+    let todos = this.state.completedToDos;
+    return todos.map((todo, i) => {
+      return (
+        <li key={i} className={todo.color}>
+          {todo.content}
+          <button>Delete</button>
+          <button>Make Current</button>
+        </li>
+      )
+    })
   }
 
   addToDo(e) {
@@ -85,6 +94,11 @@ class App extends Component {
     return arr.filter((item) => {
       return item.id !== id
     });
+  }
+
+  makeDone(id) {
+    let selectedToDo = this.getSelectedTodo(this.state.currentToDo, id)
+    
   }
 
   makeCurrent(id) {
