@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import '../assets/css/app.css';
 
+import ToDoItem from './ToDoItem';
+import MakeCurrentBtn from './MakeCurrentBtn';
+import DeleteBtn from './DeleteBtn';
+import CompleteBtn from './CompleteBtn';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -16,8 +21,10 @@ class App extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onColorChange = this.onColorChange.bind(this);
     this.incrementId = this.incrementId.bind(this);
+    this.changeToDoStatus = this.changeToDoStatus.bind(this);
   }
 
+  //HELPER FUNCTIONS
   onInputChange(e) {
     this.setState({input: e.target.value});
   }
@@ -30,6 +37,24 @@ class App extends Component {
     this.setState({currentId: this.state.currentId + 1})
   }
 
+  getSelectedTodo(id) {
+    return this.state.toDos.filter((item) => {
+      return item.id === id
+    });
+  }
+
+  filterArray(id) {
+    return this.state.toDos.filter((item) => {
+      return item.id !== id
+    });
+  }
+
+  getArray(status) {
+    return this.state.toDos.filter((item) => {
+      return item.status === status
+    });
+  }
+
   createToDo(e) {
     e.preventDefault();
     let content = this.state.input;
@@ -38,48 +63,65 @@ class App extends Component {
       content,
       color: this.state.selectedColor,
       id: this.state.currentId,
-      status: 'Open'
+      status: 'open'
     });
     this.setState({toDos});
     this.incrementId();
   }
 
-  renderToDos(status) {
-    let toDoList = this.filterArray(this.state.toDos, status);
-    return toDoList.map((todo) => {
-      return <li>{todo.content}</li>;
-    })
+  changeToDoStatus(id, newStatus) {
+    let selectedToDo = this.getSelectedTodo(id);
+    selectedToDo[0].status = newStatus;
+    this.setState({toDos: [...this.state.toDos, selectedToDo[0]]})
   }
 
-  getSelectedTodo(arr, id) {
-    return arr.filter((item) => {
-      return item.id === id
-    });
-  }
 
-  filterArray(arr, id) {
-    return arr.filter((item) => {
-      return item.id !== id
-    });
-  }
-
-  makeDone(id) {
-    let selectedToDo = this.getSelectedTodo(this.state.currentToDo, id)
-  }
-
-  makeCurrent(id) {
-    this.addToCurrentArray(id);
-    this.removeFromToDo(id);
-  }
-
-  removeFromToDo(id) {
-    let newToDos = this.filterArray(this.state.toDos, id);
-    this.setState({toDos: newToDos});
-  }
-
-  addToCurrentArray(id) {
-    let selectedToDo = this.getSelectedTodo(this.state.toDos, id)
-    this.setState({currentToDo: selectedToDo});
+  //RENDER FUNCTIONS
+  renderToDoList(status) {
+    let toDoList = this.getArray(status);
+    if (status === 'open') {
+      return toDoList.map((todo) => {
+        return (
+          <ToDoItem
+            key={todo.id}
+            color={todo.color}
+            content={todo.content}
+          >
+            <MakeCurrentBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
+            <CompleteBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
+            <DeleteBtn id={todo.id}/>
+          </ToDoItem>
+        )
+      })
+    }
+    else if (status === 'current') {
+      return toDoList.map((todo) => {
+        return (
+          <ToDoItem
+            key={todo.id}
+            color={todo.color}
+            content={todo.content}
+          >
+            <CompleteBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
+            <DeleteBtn id={todo.id}/>
+          </ToDoItem>
+        )
+      })
+    }
+    else {
+      return toDoList.map((todo) => {
+        return (
+          <ToDoItem
+            key={todo.id}
+            color={todo.color}
+            content={todo.content}
+          >
+            <MakeCurrentBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
+            <DeleteBtn id={todo.id}/>
+          </ToDoItem>
+        )
+      })
+    }
   }
 
   render () {
@@ -94,23 +136,19 @@ class App extends Component {
           <input type="radio" name="color" value="blue" onChange={this.onColorChange}></input>Blue
           <input type="radio" name="color" value="orange" onChange={this.onColorChange}></input>Orange
           <br />
-          <input type="submit" value="Submit" onClick={this.addToDo}></input>
+          <input type="submit" value="Submit" onClick={this.createToDo}></input>
         </form>
         <div className="toDo box">
           <h1>To Dos</h1>
-          <ul>
-          {
-
-          }
-          </ul>
+          {this.renderToDoList('open')}
         </div>
         <div className="currentToDo box">
           <h1>Current To Do</h1>
-
+          {this.renderToDoList('current')}
         </div>
         <div className="completedToDo box">
           <h1>Completed</h1>
-
+          {this.renderToDoList('complete')}
         </div>
       </div>
     )
