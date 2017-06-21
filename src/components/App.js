@@ -58,6 +58,10 @@ class App extends Component {
     });
   }
 
+  renderDone() {
+
+  }
+
   addToDo(e) {
     e.preventDefault();
     let content = this.state.input;
@@ -71,24 +75,30 @@ class App extends Component {
     this.setState({currentId: this.state.currentId + 1})
   }
 
+  getSelectedTodo(arr, id) {
+    return arr.filter((item) => {
+      return item.id === id
+    });
+  }
+
+  filterArray(arr, id) {
+    return arr.filter((item) => {
+      return item.id !== id
+    });
+  }
+
   makeCurrent(id) {
     this.addToCurrentArray(id);
     this.removeFromToDo(id);
   }
 
   removeFromToDo(id) {
-    let currentToDos = this.state.toDos;
-    let newToDos = currentToDos.filter((todo) => {
-      return todo.id !== id
-    })
+    let newToDos = this.filterArray(this.state.toDos, id);
     this.setState({toDos: newToDos});
   }
 
   addToCurrentArray(id) {
-    let currentToDos = this.state.toDos;
-    let selectedToDo = currentToDos.filter((todo) => {
-      return todo.id === id
-    });
+    let selectedToDo = this.getSelectedTodo(this.state.toDos, id)
     this.setState({currentToDo: selectedToDo});
   }
 
@@ -118,6 +128,7 @@ class App extends Component {
         </div>
         <div className="completedToDo box">
           <h1>Completed</h1>
+          {this.renderDone()}
         </div>
       </div>
     )
