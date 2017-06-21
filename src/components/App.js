@@ -10,9 +10,11 @@ class App extends Component {
       selectedColor: 'yellow',
       toDos : [
         {content: 'cash me outside', color: 'yellow', id: 0},
-        {content: 'how bout dat?', color: 'yellow', id: 1},
+        {content: 'how bout dat?', color: 'orange', id: 1},
       ],
-      currentToDo: [],
+      currentToDo: [
+        {content: 'whatcho want?', color: 'blue', id: 2}
+      ],
       completedToDos: []
     };
 
@@ -22,6 +24,8 @@ class App extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onColorChange = this.onColorChange.bind(this);
     this.makeCurrent = this.makeCurrent.bind(this);
+    this.removeFromToDo = this.removeFromToDo.bind(this);
+    this.addToCurrentArray = this.addToCurrentArray.bind(this);
   }
 
   onInputChange(e) {
@@ -34,27 +38,27 @@ class App extends Component {
 
   renderToDos() {
     let todos = this.state.toDos;
-    let resultArray = [];
-    todos.map((todo, i) => resultArray.push(
-      <li key={i} className={todo.color}>
-        {todo.content}
-        <button onClick={this.makeCurrent}>Make Current</button>
-        <button>Done</button>
-      </li>
-    ));
-    return resultArray;
+    return todos.map((todo, i) => {
+      return (
+        <li key={i} className={todo.color}>
+          {todo.content}
+          <button onClick={() => {this.makeCurrent(todo.id)}}>Make Current</button>
+          <button>Done</button>
+        </li>
+      )
+    });
   }
 
   renderCurrentToDo() {
     let todos = this.state.currentToDo;
-    let resultArray = [];
-    todos.map((todo, i) => resultArray.push(
-      <li key={i}>
-        {todo}
-        <button>Done</button>
-      </li>
-    ));
-    return resultArray;
+    return todos.map((todo, i) => {
+      return (
+          <li key={i}>
+            {todo.content}
+            <button>Done</button>
+          </li>
+      )
+    });
   }
 
   addToDo(e) {
@@ -65,8 +69,25 @@ class App extends Component {
     this.setState({toDos});
   }
 
-  makeCurrent(e){
-    console.log(e.target.value)
+  makeCurrent(id) {
+    this.addToCurrentArray(id);
+    this.removeFromToDo(id);
+  }
+
+  removeFromToDo(id) {
+    let currentToDos = this.state.toDos;
+    let newToDos = currentToDos.filter((todo) => {
+      return todo.id !== id
+    })
+    this.setState({toDos: newToDos});
+  }
+
+  addToCurrentArray(id) {
+    let currentToDos = this.state.toDos;
+    let selectedToDo = currentToDos.filter((todo) => {
+      return todo.id === id
+    });
+    this.setState({currentToDo: selectedToDo});
   }
 
   render () {
@@ -85,7 +106,9 @@ class App extends Component {
         </form>
         <div className="toDo box">
           <h1>To Dos</h1>
+          <ul>
           {this.renderToDos()}
+          </ul>
         </div>
         <div className="currentToDo box">
           <h1>Current To Do</h1>

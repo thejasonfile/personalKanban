@@ -234,4 +234,17 @@ header {
 .box {
   border: 2px solid black; }
 
+/* notes.sass */
+.yellow {
+  background-color: yellow; }
+
+.green {
+  background-color: green; }
+
+.blue {
+  background-color: blue; }
+
+.orange {
+  background-color: orange; }
+
 /*# sourceMappingURL=app.css.map */
