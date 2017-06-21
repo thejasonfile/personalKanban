@@ -22,6 +22,7 @@ class App extends Component {
     this.onColorChange = this.onColorChange.bind(this);
     this.incrementId = this.incrementId.bind(this);
     this.changeToDoStatus = this.changeToDoStatus.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //HELPER FUNCTIONS
@@ -43,38 +44,44 @@ class App extends Component {
     });
   }
 
-  filterArray(id) {
-    return this.state.toDos.filter((item) => {
-      return item.id !== id
-    });
-  }
-
   getArray(status) {
     return this.state.toDos.filter((item) => {
       return item.status === status
     });
   }
 
-  createToDo(e) {
+  handleSubmit(e) {
     e.preventDefault();
     let content = this.state.input;
+    let color = this.state.selectedColor;
+    this.createToDo(content, color, 'open');
+  }
+
+  createToDo(content, color, status) {
     let toDos = this.state.toDos;
     toDos.push({
       content,
-      color: this.state.selectedColor,
+      color,
       id: this.state.currentId,
-      status: 'open'
+      status
     });
     this.setState({toDos});
     this.incrementId();
   }
 
-  changeToDoStatus(id, newStatus) {
-    let selectedToDo = this.getSelectedTodo(id);
-    selectedToDo[0].status = newStatus;
-    this.setState({toDos: [...this.state.toDos, selectedToDo[0]]})
+  deleteToDo(id) {
+    let toDos = this.state.toDos.filter((item) => {
+      return item.id !== id
+    });
+    this.setState({toDos})
   }
 
+  changeToDoStatus(id, newStatus) {
+    let selectedToDo = this.getSelectedTodo(id);
+    debugger;
+    this.deleteToDo(id);
+    this.createToDo(selectedToDo[0].content, selectedToDo[0].color, newStatus);
+  }
 
   //RENDER FUNCTIONS
   renderToDoList(status) {
@@ -136,7 +143,7 @@ class App extends Component {
           <input type="radio" name="color" value="blue" onChange={this.onColorChange}></input>Blue
           <input type="radio" name="color" value="orange" onChange={this.onColorChange}></input>Orange
           <br />
-          <input type="submit" value="Submit" onClick={this.createToDo}></input>
+          <input type="submit" value="Submit" onClick={this.handleSubmit}></input>
         </form>
         <div className="toDo box">
           <h1>To Dos</h1>
