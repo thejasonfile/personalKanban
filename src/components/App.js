@@ -18,6 +18,7 @@ class App extends Component {
     };
 
     this.createToDo = this.createToDo.bind(this);
+    this.deleteToDo = this.deleteToDo.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onColorChange = this.onColorChange.bind(this);
     this.incrementId = this.incrementId.bind(this);
@@ -54,15 +55,15 @@ class App extends Component {
     e.preventDefault();
     let content = this.state.input;
     let color = this.state.selectedColor;
-    this.createToDo(content, color, 'open');
+    this.createToDo(content, color, 'open', this.state.currentId);
   }
 
-  createToDo(content, color, status) {
+  createToDo(content, color, status, id) {
     let toDos = this.state.toDos;
     toDos.push({
       content,
       color,
-      id: this.state.currentId,
+      id,
       status
     });
     this.setState({toDos});
@@ -70,17 +71,17 @@ class App extends Component {
   }
 
   deleteToDo(id) {
-    let toDos = this.state.toDos.filter((item) => {
-      return item.id !== id
+    let newtoDos = this.state.toDos.filter((todo) => {
+      return todo.id !== id
     });
-    this.setState({toDos})
+    this.setState({toDos: newtoDos})
   }
 
   changeToDoStatus(id, newStatus) {
     let selectedToDo = this.getSelectedTodo(id);
-    debugger;
-    this.deleteToDo(id);
-    this.createToDo(selectedToDo[0].content, selectedToDo[0].color, newStatus);
+    selectedToDo[0].status = newStatus;
+    selectedToDo = selectedToDo[0];
+    //this.setState({toDos : [...this.state.toDos, selectedToDo]})
   }
 
   //RENDER FUNCTIONS
@@ -96,7 +97,7 @@ class App extends Component {
           >
             <MakeCurrentBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
             <CompleteBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
-            <DeleteBtn id={todo.id}/>
+            <DeleteBtn id={todo.id} deleteToDo={this.deleteToDo}/>
           </ToDoItem>
         )
       })
