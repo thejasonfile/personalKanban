@@ -78,10 +78,7 @@ class App extends Component {
   }
 
   changeToDoStatus(id, newStatus) {
-    let selectedToDo = this.getSelectedTodo(id);
-    selectedToDo[0].status = newStatus;
-    selectedToDo = selectedToDo[0];
-    //this.setState({toDos : [...this.state.toDos, selectedToDo]})
+    
   }
 
   //RENDER FUNCTIONS
