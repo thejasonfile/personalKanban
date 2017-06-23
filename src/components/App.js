@@ -3,6 +3,7 @@ import '../assets/css/app.css';
 
 import ToDoItem from './ToDoItem';
 import MakeCurrentBtn from './MakeCurrentBtn';
+import Button from './Button';
 import DeleteBtn from './DeleteBtn';
 import CompleteBtn from './CompleteBtn';
 
@@ -96,8 +97,20 @@ class App extends Component {
             color={todo.color}
             content={todo.content}
           >
-            <MakeCurrentBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
-            <CompleteBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
+            <Button
+              id={todo.id}
+              handleClick={this.changeToDoStatus}
+              newStatus={'current'}
+            >
+            Make Current
+            </Button>
+            <Button
+              id={todo.id}
+              handleClick={this.changeToDoStatus}
+              newStatus={'complete'}
+            >
+              Complete
+            </Button>
             <DeleteBtn id={todo.id} deleteToDo={this.deleteToDo}/>
           </ToDoItem>
         )
