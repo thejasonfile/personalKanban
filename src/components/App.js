@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/css/app.css';
 
+import ContentForm from './ContentForm';
 import ToDoItem from './ToDoItem';
 import Button from './Button';
 
@@ -174,16 +175,13 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Personal Kanban</h1>
-        <form>
-          <label htmlFor="noteContent">Note Content: </label>
-          <input type="text" name="noteContent" id="noteContent" value={this.state.input} onChange={this.onInputChange}></input>
-          <input type="radio" name="color" value="yellow" onChange={this.onColorChange}></input>Yellow
-          <input type="radio" name="color" value="green" onChange={this.onColorChange}></input>Green
-          <input type="radio" name="color" value="blue" onChange={this.onColorChange}></input>Blue
-          <input type="radio" name="color" value="orange" onChange={this.onColorChange}></input>Orange
-          <br />
-          <input type="submit" value="Submit" onClick={this.handleSubmit}></input>
-        </form>
+          <ContentForm
+            input={this.state.input}
+            handleInputChange={this.onInputChange}
+            handleColorChange={this.onColorChange}
+            handleSubmit={this.handleSubmit}
+          >
+        </ContentForm>
         <div className="toDo box">
           <h1>To Dos</h1>
           {this.renderToDoList('open')}
