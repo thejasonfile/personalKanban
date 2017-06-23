@@ -17,13 +17,14 @@ class App extends Component {
       toDos : [],
     };
 
-    this.createToDo = this.createToDo.bind(this);
-    this.deleteToDo = this.deleteToDo.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onColorChange = this.onColorChange.bind(this);
     this.incrementId = this.incrementId.bind(this);
-    this.changeToDoStatus = this.changeToDoStatus.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.createToDo = this.createToDo.bind(this);
+    this.deleteToDo = this.deleteToDo.bind(this);
+    this.getIndex = this.getIndex.bind(this);
+    this.changeToDoStatus = this.changeToDoStatus.bind(this);
   }
 
   //HELPER FUNCTIONS
@@ -37,12 +38,6 @@ class App extends Component {
 
   incrementId() {
     this.setState({currentId: this.state.currentId + 1})
-  }
-
-  getSelectedTodo(id) {
-    return this.state.toDos.filter((item) => {
-      return item.id === id
-    });
   }
 
   getArray(status) {
@@ -77,8 +72,17 @@ class App extends Component {
     this.setState({toDos: newtoDos})
   }
 
+  getIndex(id) {
+    return this.state.toDos.findIndex((item) => item.id === id);
+  }
+
   changeToDoStatus(id, newStatus) {
-    
+    var index = this.getIndex(id);
+    var toDos = this.state.toDos;
+    var toDo = toDos.splice(index, 1);
+    toDo[0].status = newStatus;
+    toDos.splice(index, 0, toDo[0]);
+    this.setState({toDos});
   }
 
   //RENDER FUNCTIONS
@@ -108,7 +112,7 @@ class App extends Component {
             content={todo.content}
           >
             <CompleteBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
-            <DeleteBtn id={todo.id}/>
+            <DeleteBtn id={todo.id} deleteToDo={this.deleteToDo}/>
           </ToDoItem>
         )
       })
@@ -122,7 +126,7 @@ class App extends Component {
             content={todo.content}
           >
             <MakeCurrentBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
-            <DeleteBtn id={todo.id}/>
+            <DeleteBtn id={todo.id} deleteToDo={this.deleteToDo}/>
           </ToDoItem>
         )
       })
