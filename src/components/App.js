@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import '../assets/css/app.css';
 
 import ToDoItem from './ToDoItem';
-import MakeCurrentBtn from './MakeCurrentBtn';
 import Button from './Button';
-import DeleteBtn from './DeleteBtn';
-import CompleteBtn from './CompleteBtn';
 
 class App extends Component {
   constructor(props) {
@@ -111,7 +108,12 @@ class App extends Component {
             >
               Complete
             </Button>
-            <DeleteBtn id={todo.id} deleteToDo={this.deleteToDo}/>
+            <Button
+              id={todo.id}
+              handleClick={this.deleteToDo}
+            >
+              Delete
+            </Button>
           </ToDoItem>
         )
       })
@@ -124,8 +126,19 @@ class App extends Component {
             color={todo.color}
             content={todo.content}
           >
-            <CompleteBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
-            <DeleteBtn id={todo.id} deleteToDo={this.deleteToDo}/>
+            <Button
+              id={todo.id}
+              handleClick={this.changeToDoStatus}
+              newStatus={'complete'}
+            >
+              Complete
+            </Button>
+            <Button
+              id={todo.id}
+              handleClick={this.deleteToDo}
+            >
+              Delete
+            </Button>
           </ToDoItem>
         )
       })
@@ -138,8 +151,19 @@ class App extends Component {
             color={todo.color}
             content={todo.content}
           >
-            <MakeCurrentBtn id={todo.id} changeStatus={this.changeToDoStatus}/>
-            <DeleteBtn id={todo.id} deleteToDo={this.deleteToDo}/>
+            <Button
+              id={todo.id}
+              handleClick={this.changeToDoStatus}
+              newStatus={'current'}
+            >
+            Make Current
+            </Button>
+            <Button
+              id={todo.id}
+              handleClick={this.deleteToDo}
+            >
+              Delete
+            </Button>
           </ToDoItem>
         )
       })
