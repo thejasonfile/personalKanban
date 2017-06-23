@@ -12,31 +12,19 @@ class App extends Component {
 
     this.state = {
       currentId: 0,
-      input : '',
-      selectedColor: 'yellow',
       toDos : [],
     };
 
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onColorChange = this.onColorChange.bind(this);
     this.incrementId = this.incrementId.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.createToDo = this.createToDo.bind(this);
+    this.createNewToDo = this.createNewToDo.bind(this);
     this.deleteToDo = this.deleteToDo.bind(this);
     this.getIndex = this.getIndex.bind(this);
     this.changeToDoStatus = this.changeToDoStatus.bind(this);
+    this.checkCurrentStatus = this.checkCurrentStatus.bind(this);
     this.renderToDoList = this.renderToDoList.bind(this);
   }
 
   //HELPER FUNCTIONS
-  onInputChange(e) {
-    this.setState({input: e.target.value});
-  }
-
-  onColorChange(e) {
-    this.setState({selectedColor: e.target.value})
-  }
-
   incrementId() {
     this.setState({currentId: this.state.currentId + 1})
   }
@@ -47,14 +35,7 @@ class App extends Component {
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    let content = this.state.input;
-    let color = this.state.selectedColor;
-    this.createToDo(content, color, 'open', this.state.currentId);
-  }
-
-  createToDo(content, color, status, id) {
+  createNewToDo(content, color, status, id) {
     let toDos = this.state.toDos;
     toDos.push({
       content,
@@ -77,13 +58,23 @@ class App extends Component {
     return this.state.toDos.findIndex((item) => item.id === id);
   }
 
-  changeToDoStatus(id, newStatus) {
-    var index = this.getIndex(id);
+  checkCurrentStatus() {
     var toDos = this.state.toDos;
-    var toDo = toDos.splice(index, 1);
-    toDo[0].status = newStatus;
-    toDos.splice(index, 0, toDo[0]);
-    this.setState({toDos});
+    return toDos.some((todo) => todo.status === 'current')
+  }
+
+  changeToDoStatus(id, newStatus) {
+    console.log(newStatus)
+    if((newStatus !== 'current') && (!this.checkCurrentStatus())) {
+      var index = this.getIndex(id);
+      var toDos = this.state.toDos;
+      var toDo = toDos.splice(index, 1);
+      toDo[0].status = newStatus;
+      toDos.splice(index, 0, toDo[0]);
+      this.setState({toDos});
+    } else {
+      alert ('You can have only one current ToDo');
+    }
   }
 
   //RENDER FUNCTIONS
@@ -179,9 +170,8 @@ class App extends Component {
         <h1>Personal Kanban</h1>
         <ContentForm
           input={this.state.input}
-          handleInputChange={this.onInputChange}
-          handleColorChange={this.onColorChange}
-          handleSubmit={this.handleSubmit}
+          createNewToDo={this.createNewToDo}
+          currentId={this.state.currentId}
         >
         </ContentForm>
         <NoteContainer
