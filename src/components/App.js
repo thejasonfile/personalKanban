@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../assets/css/app.css';
 
 import ContentForm from './ContentForm';
+import NoteContainer from './NoteContainer';
 import ToDoItem from './ToDoItem';
 import Button from './Button';
 
@@ -24,6 +25,7 @@ class App extends Component {
     this.deleteToDo = this.deleteToDo.bind(this);
     this.getIndex = this.getIndex.bind(this);
     this.changeToDoStatus = this.changeToDoStatus.bind(this);
+    this.renderToDoList = this.renderToDoList.bind(this);
   }
 
   //HELPER FUNCTIONS
@@ -175,25 +177,31 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Personal Kanban</h1>
-          <ContentForm
-            input={this.state.input}
-            handleInputChange={this.onInputChange}
-            handleColorChange={this.onColorChange}
-            handleSubmit={this.handleSubmit}
-          >
+        <ContentForm
+          input={this.state.input}
+          handleInputChange={this.onInputChange}
+          handleColorChange={this.onColorChange}
+          handleSubmit={this.handleSubmit}
+        >
         </ContentForm>
-        <div className="toDo box">
-          <h1>To Dos</h1>
+        <NoteContainer
+          className='toDo box'
+          label='To Dos'
+        >
           {this.renderToDoList('open')}
-        </div>
-        <div className="currentToDo box">
-          <h1>Current To Do</h1>
+        </NoteContainer>
+        <NoteContainer
+          className='currentToDo box'
+          label='Current To Do'
+        >
           {this.renderToDoList('current')}
-        </div>
-        <div className="completedToDo box">
-          <h1>Completed</h1>
+        </NoteContainer>
+        <NoteContainer
+          className='completedToDo box'
+          label='Completed'
+        >
           {this.renderToDoList('complete')}
-        </div>
+        </NoteContainer>
       </div>
     )
   }
