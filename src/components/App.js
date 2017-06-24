@@ -20,7 +20,7 @@ class App extends Component {
     this.deleteToDo = this.deleteToDo.bind(this);
     this.getIndex = this.getIndex.bind(this);
     this.changeToDoStatus = this.changeToDoStatus.bind(this);
-    this.checkCurrentStatus = this.checkCurrentStatus.bind(this);
+    this.checkIfExstingCurrent = this.checkIfExstingCurrent.bind(this);
     this.renderToDoList = this.renderToDoList.bind(this);
   }
 
@@ -58,22 +58,23 @@ class App extends Component {
     return this.state.toDos.findIndex((item) => item.id === id);
   }
 
-  checkCurrentStatus() {
+  checkIfExstingCurrent() {
     var toDos = this.state.toDos;
     return toDos.some((todo) => todo.status === 'current')
   }
 
   changeToDoStatus(id, newStatus) {
-    console.log(newStatus)
-    if((newStatus !== 'current') && (!this.checkCurrentStatus())) {
+    let existingCurrent = this.checkIfExstingCurrent()
+    if((existingCurrent && newStatus === 'current')) {
+      let error = 'You can have only one current ToDo'
+      this.setState({error})
+    } else {
       var index = this.getIndex(id);
       var toDos = this.state.toDos;
       var toDo = toDos.splice(index, 1);
       toDo[0].status = newStatus;
       toDos.splice(index, 0, toDo[0]);
       this.setState({toDos});
-    } else {
-      alert ('You can have only one current ToDo');
     }
   }
 
