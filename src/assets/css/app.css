@@ -247,4 +247,10 @@ header {
 .orange {
   background-color: orange; }
 
+/* error.sass */
+.error {
+  background-color: red;
+  color: white;
+  margin-bottom: 12px; }
+
 /*# sourceMappingURL=app.css.map */
