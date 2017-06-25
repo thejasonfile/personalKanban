@@ -82,90 +82,94 @@ class App extends Component {
   //RENDER FUNCTIONS
   renderToDoList(status) {
     let toDoList = this.getArray(status);
-    if (status === 'open') {
-      return toDoList.map((todo) => {
-        return (
+    if (toDoList.length > 0) {
+      if (status === 'open') {
+        return toDoList.map((todo) => {
+          return (
+              <ToDoItem
+                key={todo.id}
+                color={todo.color}
+                content={todo.content}
+              >
+              <Button
+                id={todo.id}
+                handleClick={this.changeToDoStatus}
+                newStatus={'current'}
+              >
+              Make Current
+              </Button>
+              <Button
+                id={todo.id}
+                handleClick={this.changeToDoStatus}
+                newStatus={'complete'}
+              >
+                Complete
+              </Button>
+              <Button
+                className='deleteBtn'
+                id={todo.id}
+                handleClick={this.deleteToDo}
+              >
+                X
+              </Button>
+            </ToDoItem>
+          )
+        })
+      }
+      else if (status === 'current') {
+        return toDoList.map((todo) => {
+          return (
             <ToDoItem
               key={todo.id}
               color={todo.color}
               content={todo.content}
             >
-            <Button
-              id={todo.id}
-              handleClick={this.changeToDoStatus}
-              newStatus={'current'}
+              <Button
+                id={todo.id}
+                handleClick={this.changeToDoStatus}
+                newStatus={'complete'}
+              >
+                Complete
+              </Button>
+              <Button
+                className='deleteBtn'
+                id={todo.id}
+                handleClick={this.deleteToDo}
+              >
+                X
+              </Button>
+            </ToDoItem>
+          )
+        })
+      }
+      else {
+        return toDoList.map((todo) => {
+          return (
+            <ToDoItem
+              key={todo.id}
+              color={todo.color}
+              content={todo.content}
             >
-            Make Current
-            </Button>
-            <Button
-              id={todo.id}
-              handleClick={this.changeToDoStatus}
-              newStatus={'complete'}
-            >
-              Complete
-            </Button>
-            <Button
-              className='deleteBtn'
-              id={todo.id}
-              handleClick={this.deleteToDo}
-            >
-              X
-            </Button>
-          </ToDoItem>
-        )
-      })
-    }
-    else if (status === 'current') {
-      return toDoList.map((todo) => {
-        return (
-          <ToDoItem
-            key={todo.id}
-            color={todo.color}
-            content={todo.content}
-          >
-            <Button
-              id={todo.id}
-              handleClick={this.changeToDoStatus}
-              newStatus={'complete'}
-            >
-              Complete
-            </Button>
-            <Button
-              className='deleteBtn'
-              id={todo.id}
-              handleClick={this.deleteToDo}
-            >
-              X
-            </Button>
-          </ToDoItem>
-        )
-      })
-    }
-    else {
-      return toDoList.map((todo) => {
-        return (
-          <ToDoItem
-            key={todo.id}
-            color={todo.color}
-            content={todo.content}
-          >
-            <Button
-              id={todo.id}
-              handleClick={this.changeToDoStatus}
-              newStatus={'current'}
-            >
-            Make Current
-            </Button>
-            <Button
-              className='deleteBtn'
-              id={todo.id}
-              handleClick={this.deleteToDo}
-            >
-              X
-            </Button>
-          </ToDoItem>
-        )
-      })
+              <Button
+                id={todo.id}
+                handleClick={this.changeToDoStatus}
+                newStatus={'current'}
+              >
+              Make Current
+              </Button>
+              <Button
+                className='deleteBtn'
+                id={todo.id}
+                handleClick={this.deleteToDo}
+              >
+                X
+              </Button>
+            </ToDoItem>
+          )
+        })
+      }
+    } else {
+      return (<div className='noNotes'>No ToDos</div>)
     }
   }
 
