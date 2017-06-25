@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       currentId: 0,
       toDos : [],
+      error: ''
     };
 
     this.incrementId = this.incrementId.bind(this);
@@ -74,7 +75,7 @@ class App extends Component {
       var toDo = toDos.splice(index, 1);
       toDo[0].status = newStatus;
       toDos.splice(index, 0, toDo[0]);
-      this.setState({toDos});
+      this.setState({toDos, error: ''});
     }
   }
 
@@ -186,6 +187,7 @@ class App extends Component {
           label='Current To Do'
         >
           {this.renderToDoList('current')}
+          <div className='error'>{this.state.error}</div>
         </NoteContainer>
         <NoteContainer
           className='completedToDo box'
