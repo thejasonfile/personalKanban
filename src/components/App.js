@@ -85,11 +85,11 @@ class App extends Component {
     if (status === 'open') {
       return toDoList.map((todo) => {
         return (
-          <ToDoItem
-            key={todo.id}
-            color={todo.color}
-            content={todo.content}
-          >
+            <ToDoItem
+              key={todo.id}
+              color={todo.color}
+              content={todo.content}
+            >
             <Button
               id={todo.id}
               handleClick={this.changeToDoStatus}
@@ -105,10 +105,11 @@ class App extends Component {
               Complete
             </Button>
             <Button
+              className='deleteBtn'
               id={todo.id}
               handleClick={this.deleteToDo}
             >
-              Delete
+              X
             </Button>
           </ToDoItem>
         )
@@ -130,10 +131,11 @@ class App extends Component {
               Complete
             </Button>
             <Button
+              className='deleteBtn'
               id={todo.id}
               handleClick={this.deleteToDo}
             >
-              Delete
+              X
             </Button>
           </ToDoItem>
         )
@@ -155,10 +157,11 @@ class App extends Component {
             Make Current
             </Button>
             <Button
+              className='deleteBtn'
               id={todo.id}
               handleClick={this.deleteToDo}
             >
-              Delete
+              X
             </Button>
           </ToDoItem>
         )
@@ -169,9 +172,9 @@ class App extends Component {
   render () {
     return (
       <div className='container'>
-        <div className='title'>
+        <header className='header'>
           <h1>Personal Kanban</h1>
-        </div>
+        </header>
         <ContentForm
           input={this.state.input}
           createNewToDo={this.createNewToDo}

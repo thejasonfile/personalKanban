@@ -53,7 +53,7 @@ class ContentForm extends Component {
           <input type="radio" name="color" value="blue" onChange={this.onColorChange}></input>Blue
           <input type="radio" name="color" value="orange" onChange={this.onColorChange}></input>Orange
           <br />
-          <input type="submit" value="Submit" onClick={this.handleSubmit}></input>
+          <input type="submit" value="Add Note" onClick={this.handleSubmit}></input>
         </form>
       </div>
     )

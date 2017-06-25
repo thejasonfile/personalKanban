@@ -2,7 +2,12 @@ import React from 'react';
 
 const ToDoItem = (props) => {
   return (
-    <li key={props.id} className={props.color}>{props.content}{props.children}</li>
+    <div className='noteContent'>
+      <li key={props.id} className={props.color}>{props.content}</li>
+      <div className='noteButtons'>
+        {props.children}
+      </div>
+    </div>
   )
 }
 

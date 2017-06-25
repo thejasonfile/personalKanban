@@ -7,7 +7,7 @@ const Button = (props) => {
     )
   } else {
     return (
-      <button onClick={() => {props.handleClick(props.id)}}>{props.children}</button>
+      <button className={props.className} onClick={() => {props.handleClick(props.id)}}>{props.children}</button>
     )
   }
 }

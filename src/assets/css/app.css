@@ -199,11 +199,15 @@ hr {
     content: "";
     display: block; }
 
+li {
+  list-style: none; }
+
 /* HEADER.SASS */
 header {
   text-align: center; }
   header h1 {
-    font-size: 48px; }
+    font-size: 38.4px;
+    margin: 10px; }
 
 /* CONTAINERS.SASS */
 .container, .currentProject {
@@ -215,7 +219,7 @@ header {
   border: 5px solid black;
   border-radius: 15px;
   margin-bottom: 10px;
-  height: 60vh;
+  height: 100%;
   text-align: center; }
   .container:last-child, .currentProject:last-child {
     margin-right: 0; }
@@ -230,27 +234,66 @@ header {
   .currentProject:last-child {
     margin-right: 0; }
 
+/* box.sass */
+.box {
+  display: flex;
+  flex-direction: column; }
+  .box .notes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; }
+    .box .notes .noteContent {
+      position: relative;
+      margin: 5px; }
+      .box .notes .noteContent li {
+        padding: 10px; }
+    .box .notes .deleteBtn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-color: transparent;
+      color: black;
+      padding: 2px; }
+
 /* boxes.sass */
 .box {
   border: 2px solid black; }
 
 /* notes.sass */
 .yellow {
-  background-color: yellow; }
+  background-color: #f4f44b; }
 
 .green {
-  background-color: green; }
+  background-color: #0bc31b; }
 
 .blue {
-  background-color: blue; }
+  background-color: #69dfe6; }
 
 .orange {
-  background-color: orange; }
+  background-color: #ffc355; }
 
 /* error.sass */
 .error {
   background-color: red;
   color: white;
   margin-bottom: 12px; }
+
+/* contentForm.sass */
+.contentForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .contentForm input[type='radio'] {
+    margin-left: 10px; }
+  .contentForm input[type='submit'] {
+    margin: 10px 0; }
+
+/* currentToDo.sass */
+.currentToDo .notes {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+.currentToDo .error {
+  padding: 0 10px; }
 
 /*# sourceMappingURL=app.css.map */
