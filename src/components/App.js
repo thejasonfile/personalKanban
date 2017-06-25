@@ -168,8 +168,10 @@ class App extends Component {
 
   render () {
     return (
-      <div className="container">
-        <h1>Personal Kanban</h1>
+      <div className='container'>
+        <div className='title'>
+          <h1>Personal Kanban</h1>
+        </div>
         <ContentForm
           input={this.state.input}
           createNewToDo={this.createNewToDo}

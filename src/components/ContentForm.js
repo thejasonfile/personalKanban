@@ -43,17 +43,19 @@ class ContentForm extends Component {
 
   render() {
     return (
-      <form>
-        <label htmlFor="noteContent">Note Content: </label>
-        <input type="text" name="noteContent" id="noteContent" value={this.state.input} onChange={this.onInputChange}></input>
-        <div className='error'>{this.state.error}</div>
-        <input type="radio" name="color" value="yellow" onChange={this.onColorChange}></input>Yellow
-        <input type="radio" name="color" value="green" onChange={this.onColorChange}></input>Green
-        <input type="radio" name="color" value="blue" onChange={this.onColorChange}></input>Blue
-        <input type="radio" name="color" value="orange" onChange={this.onColorChange}></input>Orange
-        <br />
-        <input type="submit" value="Submit" onClick={this.handleSubmit}></input>
-      </form>
+      <div className='contentForm'>
+        <form>
+          <label htmlFor="noteContent">Note Content: </label>
+          <input type="text" name="noteContent" id="noteContent" value={this.state.input} onChange={this.onInputChange}></input>
+          <div className='error'>{this.state.error}</div>
+          <input type="radio" name="color" value="yellow" onChange={this.onColorChange}></input>Yellow
+          <input type="radio" name="color" value="green" onChange={this.onColorChange}></input>Green
+          <input type="radio" name="color" value="blue" onChange={this.onColorChange}></input>Blue
+          <input type="radio" name="color" value="orange" onChange={this.onColorChange}></input>Orange
+          <br />
+          <input type="submit" value="Submit" onClick={this.handleSubmit}></input>
+        </form>
+      </div>
     )
   }
 }
